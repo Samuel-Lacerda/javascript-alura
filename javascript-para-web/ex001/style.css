@@ -53,3 +53,13 @@
     text-align: center;
     width: 280px;
   }
+
+  .ativa{
+      border-radius: 20px;
+      cursor: pointer;
+      background-color: #56caa7;
+      font-family: 'Montserrat', sans-serif;
+      height: 80px;
+      width: 80px;
+    }
+  
