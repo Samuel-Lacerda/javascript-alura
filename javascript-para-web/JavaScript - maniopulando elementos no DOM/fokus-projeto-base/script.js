@@ -3,32 +3,61 @@ const focoBtn = document.querySelector('.app__card-button--foco');
 const curtoBtn = document.querySelector('.app__card-button--curto');
 const longoBtn = document.querySelector('.app__card-button--longo');
 const imgBanner = document.querySelector('.app__image');
+const titulo = document.querySelector('.app__title');
+const botoes = document.querySelectorAll('.app__card-button');
+const musicaFocoInput = document.querySelector('#alternar-musica');
+const musica = new Audio('sons/luna-rise-part-one.mp3'); 
+musica.loop = true;
+musica.volume = 0.2;
 
-
+musicaFocoInput.addEventListener('change', () => {
+    if (musica.paused) {
+        musica.play();
+    } else {
+        musica.pause()
+    }
+})
 
 focoBtn.addEventListener('click',() =>{
-    focoBtn.classList.add('active');
-    curtoBtn.classList.remove('active');
-    longoBtn.classList.remove('active');
     alterarContexto('foco');
+    focoBtn.classList.add('active');
 })
 
 curtoBtn.addEventListener('click', () =>{
-    focoBtn.classList.remove('active');
-    curtoBtn.classList.add('active');
-    longoBtn.classList.remove('active');
     alterarContexto('descanso-curto');
+    curtoBtn.classList.add('active');
 })
 
 longoBtn.addEventListener('click',()=>{
-    focoBtn.classList.remove('active');
-    curtoBtn.classList.remove('active');
-    longoBtn.classList.add('active');
     alterarContexto('descanso-longo');
+    longoBtn.classList.add('active');
 })
 
 
 function alterarContexto(contexto){
+
+    botoes.forEach(contexto => {
+        contexto.classList.remove('active');
+    });
+
     html.setAttribute('data-contexto',contexto);
     imgBanner.setAttribute('src',`imagens/${contexto}.png`);
+    switch (contexto){
+        case "foco":
+            titulo.innerHTML = `Otimize sua produtividade,<br>
+            <strong class="app__title-strong">mergulhe no que importa.</strong>`;
+            break;
+            
+        case "descanso-curto":
+            titulo.innerHTML = `Que tal dar uma respirada?,<br>
+            <strong class="app__title-strong">Faça uma pausa curta!</strong>`;
+            break;
+
+        case "descanso-longo":
+            titulo.innerHTML = `Hora de voltar à superfície.,<br>
+            <strong class="app__title-strong">Faça uma pausa longa.</strong>`;
+            break;
+    default:
+        break;
+    }
 }
